@@ -132,7 +132,9 @@ Application d’intelligence artificielle utilisant
 Teachable Machine et TensorFlow.js
 </p>
 
-<button onclick="init()">Démarrer la caméra</button>
+<button id="start-btn" onclick="init()">
+    🎥 Démarrer la caméra
+</button>
 
 <div id="webcam-container"></div>
 
@@ -151,6 +153,21 @@ const URL = "./my_model/";
 let model, webcam, labelContainer, maxPredictions;
 
 async function init() {
+
+    const startBtn = document.getElementById("start-btn");
+
+    // Changer le texte du bouton
+    startBtn.innerHTML = "⏳ Chargement...";
+
+    // Désactiver le bouton
+    startBtn.disabled = true;
+
+    // Style bouton désactivé
+    startBtn.style.opacity = "0.7";
+    startBtn.style.cursor = "not-allowed";
+
+    // Notification
+    alert("📷 Caméra activée avec succès !");
 
     const modelURL = URL + "model.json";
     const metadataURL = URL + "metadata.json";
@@ -194,7 +211,10 @@ async function init() {
 
         labelContainer.appendChild(div);
     }
-}
+
+    // Bouton terminé
+    startBtn.innerHTML = "✅ Caméra Active";
+        }
 
 async function loop(){
 
