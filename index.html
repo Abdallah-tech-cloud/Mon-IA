@@ -132,10 +132,10 @@ Application d’intelligence artificielle utilisant
 Teachable Machine et TensorFlow.js
 </p>
 
-<button id="start-btn" onclick="init()">
-    🎥 Démarrer la caméra
+<button id="start-btn" onclick="startCamera()">
+    ▶️ Démarrer la caméra
 </button>
-
+    
 <div id="webcam-container"></div>
 
 <div id="label-container"></div>
@@ -214,6 +214,29 @@ async function init() {
 
     // Bouton terminé
     startBtn.innerHTML = "✅ Caméra Active";
+        }
+    async function startCamera(){
+
+    const button = document.getElementById("start-btn");
+
+    button.innerHTML = "⏳ Chargement...";
+    button.disabled = true;
+
+    try{
+
+        await init();
+
+        button.innerHTML = "✅ Caméra activée";
+        button.style.background = "#16a34a";
+
+    }catch(error){
+
+        console.error(error);
+
+        button.innerHTML = "❌ Erreur caméra";
+        button.style.background = "#dc2626";
+
+    }
         }
 
 async function loop(){
